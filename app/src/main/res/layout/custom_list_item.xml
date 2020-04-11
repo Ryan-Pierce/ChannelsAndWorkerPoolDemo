@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="user" type="me.ryanpierce.channelsandworkerpooldemo.User" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:onClick="@{clickListener}">
+
+        <ImageView android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0"
+            android:src="@{user.photo.image}"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView android:id="@+id/custom_title"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:textSize="28sp"
+                tools:text="Ryan Pierce"
+                android:text="@{user.name}"
+                />
+
+            <TextView android:id="@+id/custom_subtitle"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="0dp"
+                android:layout_marginLeft="32dp"
+                android:gravity="center_vertical"
+                android:textSize="22sp"
+                tools:text="Happily coding"
+                android:text="@{user.status}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
