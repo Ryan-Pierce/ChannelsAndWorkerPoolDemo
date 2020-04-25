@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         // Start a worker pool that retrieves photos of users
         //   based on their uid. By default, 4 coroutines
         //   are launched into the pool.
-        workerPool = WorkerPool { uid ->
+        workerPool = WorkerPool(this) { uid ->
             uid.getPhoto(this)
         }
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onDestroy() {
         super.onDestroy()
-        workerPool.cancel() // Clean up our worker pool
+        workerPool.cancel() // Clean up our worker pool (redundant though, since we pass mainScope)
         cancel()
     }
 }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
 class WorkerPool<T, R>(
-    val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    val scope: CoroutineScope,
     concurrency: Int = 4,
     transform: suspend (T) -> R
 ) {
@@ -18,7 +18,7 @@ class WorkerPool<T, R>(
 
     init {
         repeat(concurrency) {
-            coroutineScope.launch {
+            scope.launch(Dispatchers.Default) {
                 sendChannel.consumeEach {
                     receiveChannel.send(transform(it))
                 }
@@ -26,5 +26,5 @@ class WorkerPool<T, R>(
         }
     }
 
-    fun cancel() = coroutineScope.cancel()
+    fun cancel() = scope.cancel()
 }
