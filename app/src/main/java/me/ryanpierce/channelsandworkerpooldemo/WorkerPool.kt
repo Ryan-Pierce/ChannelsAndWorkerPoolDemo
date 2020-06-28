@@ -4,7 +4,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
 class WorkerPool<T, R>(
@@ -19,8 +18,8 @@ class WorkerPool<T, R>(
     init {
         repeat(concurrency) {
             scope.launch(Dispatchers.Default) {
-                sendChannel.consumeEach {
-                    receiveChannel.send(transform(it))
+                for (element in sendChannel) {
+                    receiveChannel.send(transform(element))
                 }
             }
         }
