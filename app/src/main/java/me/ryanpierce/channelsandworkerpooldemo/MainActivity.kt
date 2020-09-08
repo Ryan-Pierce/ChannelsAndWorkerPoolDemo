@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onDestroy() {
         super.onDestroy()
-        workerPool.cancel() // Clean up our worker pool (redundant though, since we pass mainScope)
         cancel()
     }
 }

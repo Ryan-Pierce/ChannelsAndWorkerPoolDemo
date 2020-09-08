@@ -24,6 +24,4 @@ class WorkerPool<T, R>(
             }
         }
     }
-
-    fun cancel() = scope.cancel()
 }
